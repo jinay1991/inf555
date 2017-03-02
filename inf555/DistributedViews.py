@@ -9,7 +9,7 @@
 
 import random
 import math
-from . import Point3
+from Point3 import Point3
 
 class DistributedViews:
     __d = 0
@@ -61,7 +61,7 @@ class DistributedViews:
         filename = "/home/jinay/workspace/git-repos/upwork/inf555/sphere2.off"
         self.initSphere(filename)
 
-    def __deinit__(self):
+    def __del__(self):
         del self.__centroids
 
     def getNum(self):
