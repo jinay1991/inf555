@@ -1,41 +1,41 @@
 #Preprocessing
-On itère le paragraphe suivant sur les images.
+The following paragraph is iterated on the images.
 
-##Traitement d'une image
+## Processing an image
 
-###Génération de directions de projections
-Nombre de directions : `d = 100`.   
-Sélection de `d` points sur un maillage fin d'une sphère.   
-*k-means* (algorithme de Lloyd avec `k=d`) pour déterminer `d` centroïdes correspondant aux directions. On retient les directions correspondantes de l'image (parmi l'ensemble des points-clés liés à cette image).
+### Generating projection directions
+Number of directions: `d = 100`.
+Selection of points on a fine mesh of a sphere.
+* K-means * (Lloyd algorithm with `k = d`) to determine` centroids' corresponding to the directions. We retain the corresponding directions of the image (among the set of key points linked to this image).
 
-###Rendu du tracé de lignes
-Projection des cartes de profondeur des modèles 3D vus depuis les `d` directions calculées auparavant.  
-Application du filtre de Canny pour extraire les contours.  
+### Rendering of lines
+Projection of depth maps of 3D models seen from previously calculated directions.
+Application of the Canny filter to extract the contours.
 
-###Calcul du vecteur caractéristique local
-On tire au hasard 10^6/(Nd) points-clés sur l'image.   
-Pour chaque point-clé, on calcule le vecteur caractéristique local (un vecteur de `n*n*d` composantes), et on le stocke dans une structure de données adaptée (`vector` ?).  
+### Calculation of the local characteristic vector
+We randomly draw 10 ^ 6 / (Nd) key points on the image.
+For each key point, the local characteristic vector (a component vectors n * n *) is computed and stored in a suitable vector structure (`vector`?).
 
 
-##Représentation
+##Representation
 
-###Classification des vecteurs caractéristiques locaux
-On effectue une classification non supervisée (*k-means*) sur les VCL précédemment calculées, avec `k=1000` (ou mieux `k=2500`).
+### Classification of local feature vectors
+An unsupervised classification (* k-means *) is performed on the previously computed VCL, with `k = 1000` (or better` k = 2500`).
 
-###Construction des histogrammes visuels
-Pour chaque modèle de la bibliothèque, et chaque vue de ce modèle, on calcule un histogramme visuel.  
-Pour chaque vue, on crée un vecteur **h**, histogramme. On calcule le VCL et on note `j` la classe à laquelle il appartient. On incrémente alors la composante `j` du vecteur **h** d'une unité.  
-On stocke l'histogramme ainsi calculé dans une structure de données inversée (pour chercher sur les histogrammes et trouver les vues correspondantes).
+### Construction of visual histograms
+For each model of the library, and each view of this model, a visual histogram is calculated.
+For each view, we create a vector ** h **, histogram. The VCL is computed and the class to which it belongs is noted. The component of the vector ** h ** is then incremented by one unit.
+The histogram thus calculated is stored in a reversed data structure (to search the histograms and find corresponding views).
 
 
 
 #Querying
-Nothing yet...
+Nothing yet ...
 
 
 
-#Idées pour l'implémentation
+# Ideas for Implementation
 
-* Une classe `Histogram` pour stocker les histogrammes, mesurer la similarité, etc.  
-* Une structure de table de hashage : `Histogram => Model3D` où le modèle 3D est représenté simplement par son nom de fichier OFF.
-* *À compléter...* :p
+* A `Histogram` class to store histograms, measure similarity, etc.
+* A hash table structure: `Histogram => Model3D` where the 3D model is represented simply by its filename OFF.
+* * To be completed ... *: p
